@@ -67,6 +67,3 @@ ENV MODE="release"
 # (optional) copy bin folder and patches needed by Jenkins CI/CD, not needed when building V8 manually
 COPY ./bin/ /home
 COPY ./patches/ /home/patches
-
-# (optional) setup git config
-COPY ./config/gitconfig /root/.gitconfig
