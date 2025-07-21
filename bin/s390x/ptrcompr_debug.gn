@@ -1,3 +1,7 @@
+is_clang = true
+clang_base_path = "/usr"
+clang_use_chrome_plugins = false
+treat_warnings_as_errors = false
 is_component_build = true
 target_cpu = "s390x"
 v8_target_cpu = "s390x"
@@ -8,6 +12,4 @@ v8_enable_verify_heap = true
 is_debug = true
 symbol_level = 0
 v8_enable_pointer_compression = true
-use_custom_libcxx = false
 cc_wrapper = "ccache"
-treat_warnings_as_errors = false
