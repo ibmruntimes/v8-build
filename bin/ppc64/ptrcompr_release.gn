@@ -12,3 +12,4 @@ v8_enable_verify_heap = true
 is_debug = false
 v8_enable_pointer_compression = true
 cc_wrapper = "ccache"
+v8_enable_maglev = false
