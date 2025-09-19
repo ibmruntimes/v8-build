@@ -11,3 +11,4 @@ v8_enable_object_print = true
 v8_enable_verify_heap = true
 is_debug = false
 cc_wrapper = "ccache"
+v8_enable_maglev = false
