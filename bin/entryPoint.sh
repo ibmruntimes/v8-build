@@ -109,6 +109,7 @@ mkdir -p out/$MACHINE_ARCH
 cp /home/$MACHINE_ARCH/$MODE.gn out/$MACHINE_ARCH/args.gn
 gn gen /home/v8/out/$MACHINE_ARCH
 ninja -C /home/v8/out/$MACHINE_ARCH -j $NPROC
+cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh
 
 # run tests
 python3 tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
