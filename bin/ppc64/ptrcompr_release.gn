@@ -1,7 +1,6 @@
 is_clang = true
 clang_base_path = "/usr"
 clang_use_chrome_plugins = false
-treat_warnings_as_errors = false
 is_component_build = false
 target_cpu = "ppc64"
 v8_target_cpu = "ppc64"
@@ -11,4 +10,4 @@ v8_enable_object_print = true
 v8_enable_verify_heap = true
 is_debug = false
 v8_enable_pointer_compression = true
-cc_wrapper = "ccache"
+cc_wrapper = "cc_wrapper.sh"
