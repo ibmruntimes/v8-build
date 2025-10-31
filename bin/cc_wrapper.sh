@@ -45,9 +45,6 @@ if [ "$is_third_party" = true ]; then
     extra_flags="$extra_flags -Wno-deprecate-lax-vec-conv-all"
     # Needed to silence fuzztest errors on conversion between vector types.
     extra_flags="$extra_flags -Wno-deprecated-altivec-src-compat"
-    # Needed to silence abseil sign-conversion errors.
-    extra_flags="$extra_flags -Wno-sign-conversion"
-    extra_flags="$extra_flags -Wno-shorten-64-to-32"
   elif [ "$arch" = "s390x" ]; then
     :
   else
