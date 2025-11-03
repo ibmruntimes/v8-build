@@ -10,4 +10,3 @@ v8_enable_verify_heap = true
 is_debug = false
 v8_enable_pointer_compression = true
 cc_wrapper = "cc_wrapper.sh"
-treat_warnings_as_errors = false
