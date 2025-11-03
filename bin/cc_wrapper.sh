@@ -25,9 +25,12 @@
 # `-Wno-error=unknown-warning-option` to keep them visible as warnings instead of
 # treating them as errors.
 extra_flags="-Wno-unknown-warning-option"
-is_third_party=false
 
-# Check if we are building third party libs
+# Libc++ only supports Clang 20 and later.
+extra_flags="$extra_flags -Wno-#warnings"
+
+# Check if we are building third party libs.
+is_third_party=false
 for arg in "$@"; do
   case "$arg" in
     *third_party/*)
@@ -53,5 +56,5 @@ if [ "$is_third_party" = true ]; then
   fi
 fi
 
-# Forward everything through ccache with the extra flags
+# Forward everything through ccache with the extra flags.
 exec ccache "$@" $extra_flags

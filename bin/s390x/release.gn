@@ -9,4 +9,3 @@ v8_enable_object_print = true
 v8_enable_verify_heap = true
 is_debug = false
 cc_wrapper = "cc_wrapper.sh"
-treat_warnings_as_errors = false
