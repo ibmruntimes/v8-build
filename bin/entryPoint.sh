@@ -30,6 +30,15 @@ cargo install bindgen-cli
 clang++ --version
 rustc --version
 
+# Build gn
+# (optional) run gn unittests
+# Use a platform specific `ninja` binary
+cd /home/gn && \
+  python3 build/gen.py && ninja -C out && \
+  out/gn_unittests && \
+  cp /home/gn/out/gn /bin/gn && \
+  chmod +x /bin/gn
+
 # Set path to gn depending on architecture, install any dependencies
 MACHINE_ARCH=
 if [ $(uname -m) == "s390x" ] ;
