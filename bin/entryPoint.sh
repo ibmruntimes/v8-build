@@ -15,11 +15,22 @@
 #  limitations under the License.
 #
 
+CLANG_VERSION="19.1.7"
+RUST_VERSION="1.84.1"
+
 if [[ -z "$NPROC" ]] ; then
   NPROC=$(nproc)
 fi
 
-# set path to gn depending on architecture, install any dependencies
+# Install the toolchain
+dnf install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION
+cargo install bindgen-cli
+
+# Print the compiler versions
+clang++ --version
+rustc --version
+
+# Set path to gn depending on architecture, install any dependencies
 MACHINE_ARCH=
 if [ $(uname -m) == "s390x" ] ;
 then
@@ -37,23 +48,20 @@ if [[ ! -f /home/$MACHINE_ARCH/$MODE.gn ]] ; then
   exit
 fi
 
-# print the compiler version
-clang++ --version
-
-# Build and test V8.
+# Build and test V8
 echo "===================================="
 echo "Architecture is:" $MACHINE_ARCH
 echo "Mode is:" $MODE
 echo "Parallel Build/Test (-j):" $NPROC
 echo "===================================="
 
-# fetch latest v8
+# Fetch latest v8
 DEPOT_TOOLS_BOOTSTRAP_PYTHON3=0 fetch v8
 cd v8
 
 # Iterate through passed features
 # They need to be passed to `make`, example: `make NPROC=4 test-debug-master features="enable-simd"`
-# patches need to go as `diff` files under the `build\patches` folder, example: `patches/enable-simd.patch`
+# Patches need to go as `diff` files under the `build\patches` folder, example: `patches/enable-simd.patch`
 echo "===================================="
 echo "Features:"
 for arg in "$@"
@@ -74,7 +82,7 @@ git branch -at |\
 V8_BETA_BRANCH=$(sed '1q;d' v8-branches.txt)
 V8_STABLE_BRANCH=$(sed '2q;d' v8-branches.txt)
 
-# checkout a branch or a commit hash
+# Checkout a branch or a commit hash
 CHECKOUT=$V8_BRANCH
 if [[ -n "$V8_HASH" ]] ; then
   CHECKOUT=$V8_HASH
@@ -95,7 +103,7 @@ if [ "$CHECKOUT" != "main" ]; then
     gclient sync
 fi
 
-# cherry-pick a CL if needed
+# Cherry-pick a CL if needed
 if [[ -n "$CHERRY_PICK" ]] ; then
   REF=refs/changes/$CHERRY_PICK
   echo "===================================="
@@ -104,13 +112,13 @@ if [[ -n "$CHERRY_PICK" ]] ; then
   git fetch https://chromium.googlesource.com/v8/v8 $REF && git cherry-pick FETCH_HEAD
 fi
 
-# copy args required for gn, build
+# Copy args required for gn, build
 cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh
 mkdir -p out/$MACHINE_ARCH
 cp /home/$MACHINE_ARCH/$MODE.gn out/$MACHINE_ARCH/args.gn
 gn gen /home/v8/out/$MACHINE_ARCH
 ninja -C /home/v8/out/$MACHINE_ARCH -j $NPROC
 
-# run tests
+# Run the tests
 python3 tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
                                 --outdir=out/$MACHINE_ARCH --variants=exhaustive
