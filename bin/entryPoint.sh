@@ -36,8 +36,8 @@ rustc --version
 cd /home/gn && \
   python3 build/gen.py && ninja -C out && \
   out/gn_unittests && \
-  cp /home/gn/out/gn /bin/gn && \
-  chmod +x /bin/gn
+  cp out/gn /bin/gn && \
+  chmod +x /bin/gn && cd /home
 
 # Set path to gn depending on architecture, install any dependencies
 MACHINE_ARCH=
