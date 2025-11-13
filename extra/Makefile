@@ -34,7 +34,7 @@ pull_base_image:
 	docker pull $(IMG)
 
 run: pull_base_image
-	docker run -e "NPROC=$(NPROC)" $(IMG) bash -c "export CC=clang && export CXX=clang++ && export CLANG_VERSION=$(CLANG_VERSION) && wget -O - https://raw.githubusercontent.com/ibmruntimes/v8-build/main/extra/$(NAME).sh | bash"
+	docker run -e "NPROC=$(NPROC)" -v /etc/rhsm:/etc/rhsm -v /etc/pki/entitlement:/etc/pki/entitlement -v /etc/pki/consumer:/etc/pki/consumer $(IMG) bash -c "export CC=clang && export CXX=clang++ && export CLANG_VERSION=$(CLANG_VERSION) && wget -O - https://raw.githubusercontent.com/ibmruntimes/v8-build/main/extra/$(NAME).sh | bash"
 	docker system prune -f
 
 .PHONY: pull_base_image run
