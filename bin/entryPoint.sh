@@ -23,7 +23,7 @@ if [[ -z "$NPROC" ]] ; then
 fi
 
 # Install the toolchain
-dnf install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION
+dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION
 cargo install bindgen-cli
 
 # Print the compiler versions
