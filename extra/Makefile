@@ -14,6 +14,7 @@
 #
 
 MACHINE_ARCH = $(shell uname -m)
+CLANG_VERSION = "19.1.7"
 
 ifndef DOCKER_TARGET_LINK
   DOCKER_TARGET_LINK=
@@ -33,7 +34,7 @@ pull_base_image:
 	docker pull $(IMG)
 
 run: pull_base_image
-	docker run -e "NPROC=$(NPROC)" $(IMG) bash -c "export CC=clang && export CXX=clang++ && wget -O - https://raw.githubusercontent.com/ibmruntimes/v8-build/main/extra/$(NAME).sh | bash"
+	docker run -e "NPROC=$(NPROC)" $(IMG) bash -c "export CC=clang && export CXX=clang++ && export CLANG_VERSION=$(CLANG_VERSION) && wget -O - https://raw.githubusercontent.com/ibmruntimes/v8-build/main/extra/$(NAME).sh | bash"
 	docker system prune -f
 
 .PHONY: pull_base_image run
