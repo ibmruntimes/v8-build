@@ -19,6 +19,9 @@ if [[ -z "$NPROC" ]] ; then
   NPROC=$(nproc)
 fi
 
+# Install the toolchain
+dnf -y install llvm-toolset-$CLANG_VERSION
+
 git clone https://github.com/google/highway.git && cd highway
 git checkout master
 mkdir build && cd build
