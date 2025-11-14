@@ -54,6 +54,7 @@ RUN git clone https://gn.googlesource.com/gn
 # Set environment variables
 ENV PATH=$PATH:/home/depot_tools/
 ENV VPYTHON_BYPASS="manually managed python not supported by chrome operations"
+ENV RUSTC_BOOTSTRAP=1
 ENV V8_BRANCH="main"
 ENV MODE="release"
 
