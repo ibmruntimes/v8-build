@@ -15,12 +15,16 @@
 #  limitations under the License.
 #
 
+RHEL_VERSION="8.10"
 CLANG_VERSION="19.1.7"
 RUST_VERSION="1.84.1"
 
 if [[ -z "$NPROC" ]] ; then
   NPROC=$(nproc)
 fi
+
+# Pin subscription-manager release to match container OS version
+subscription-manager release --set="$RHEL_VERSION"
 
 # Install the toolchain
 dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION
