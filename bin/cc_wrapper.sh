@@ -18,16 +18,8 @@
 # This wrapper is only needed when `treat_warnings_as_errors = true` is set.
 # You can avoid using it if you disable that flag in your GN args file.
 
-# We apply `-Wno-unknown-warning-option` globally because we use an older
-# version of Clang than Chromium upstream. As a result, some newer compiler flags
-# may not be recognized by our compiler and would otherwise cause errors.
-# This option suppresses those warnings. Alternatively, you can use
-# `-Wno-error=unknown-warning-option` to keep them visible as warnings instead of
-# treating them as errors.
-extra_flags="-Wno-unknown-warning-option"
-
 # Libc++ only supports Clang 20 and later.
-extra_flags="$extra_flags -Wno-#warnings"
+extra_flags="-Wno-#warnings"
 
 # Check if we are building third party libs.
 is_third_party=false
