@@ -134,4 +134,4 @@ ninja -C /home/v8/out/$MACHINE_ARCH -j $NPROC
 
 # Run the tests
 python3 tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \
-                                --outdir=out/$MACHINE_ARCH
+                                --outdir=out/$MACHINE_ARCH --variants=exhaustive
