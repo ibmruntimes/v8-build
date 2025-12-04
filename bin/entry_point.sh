@@ -24,7 +24,7 @@ if [[ -z "$NPROC" ]] ; then
 fi
 if [[ -z "$BIN" ]] ; then
   echo "BIN is not specified, exiting!"
-  exit
+  exit 1
 fi
 
 # Pin subscription-manager release to match container OS version
