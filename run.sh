@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #  Copyright IBM Corp. and others 2025
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +15,10 @@
 #  limitations under the License.
 #
 
-FROM DOCKER_TARGET_LINKrt-nodejs-build-base-img-TEMPLATE_ARCH:latest
+MACHINE_ARCH=$(uname -m)
 
-# To test V8 master in release mode, we just use default settings
-ENV MODE="TEMPLATE_MODE"
-ENV V8_BRANCH="TEMPLATE_BRANCH"
-ENTRYPOINT ["/home/entryPoint.sh"]
+docker pull $(DOCKER_REGISTRY)/rt-nodejs-v8-$MACHINE_ARCH:latest
+
+docker run -e NPROC=$NPROC -e BIN=$BIN -e V8_BRANCH=$V8_BRANCH -e V8_MODE=$V8_MODE -v $CCACHE_DIR:/root/.ccache -v /etc/rhsm:/etc/rhsm -v /etc/pki/entitlement:/etc/pki/entitlement -v /etc/pki/consumer:/etc/pki/consumer $DOCKER_REGISTRY/rt-nodejs-v8-$MACHINE_ARCH
+
+docker system prune -f

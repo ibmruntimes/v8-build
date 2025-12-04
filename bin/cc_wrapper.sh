@@ -32,18 +32,18 @@ for arg in "$@"; do
   esac
 done
 
-arch=$(uname -m)
+MACHINE_ARCH=$(uname -m)
 
 if [ "$is_third_party" = true ]; then
-  if [ "$arch" = "ppc64le" ]; then
+  if [ "$MACHINE_ARCH" = "ppc64le" ]; then
     # Needed to silence abseil, simdutf errors on conversion between vector types.
     extra_flags="$extra_flags -Wno-deprecate-lax-vec-conv-all"
     # Needed to silence fuzztest errors on conversion between vector types.
     extra_flags="$extra_flags -Wno-deprecated-altivec-src-compat"
-  elif [ "$arch" = "s390x" ]; then
+  elif [ "$MACHINE_ARCH" = "s390x" ]; then
     :
   else
-    echo "We only build on ppc64le and s390x, exiting!"
+    echo "We only build on s390x and ppc64le, exiting!"
     exit 1
   fi
 fi

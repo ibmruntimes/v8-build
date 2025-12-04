@@ -19,12 +19,9 @@ if [[ -z "$NPROC" ]] ; then
   NPROC=$(nproc)
 fi
 
-# Install the toolchain
-dnf -y install llvm-toolset-$CLANG_VERSION
-
-git clone https://github.com/abseil/abseil-cpp.git && cd abseil-cpp
+git clone https://github.com/google/highway.git && cd highway
 git checkout master
 mkdir build && cd build
-cmake .. -DABSL_BUILD_TESTING=ON -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON
-MAKEFLAGS="-j$NPROC" cmake --build . --target all
-ctest -j$NPROC
+cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-DHWY_BROKEN_EMU128=0'
+make -j$NPROC
+make test -j$NPROC

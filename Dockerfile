@@ -52,12 +52,13 @@ RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 RUN git clone https://gn.googlesource.com/gn
 
 # Set environment variables
+ENV CC=clang
+ENV CXX=clang++
 ENV PATH=$PATH:/home/depot_tools/
 ENV VPYTHON_BYPASS="manually managed python not supported by chrome operations"
 ENV RUSTC_BOOTSTRAP=1
-ENV V8_BRANCH="main"
-ENV MODE="release"
 
-# (optional) copy bin folder and patches needed by Jenkins CI/CD, not needed when building V8 manually
+# Copy the bin folder
 COPY ./bin/ /home
-COPY ./patches/ /home/patches
+
+ENTRYPOINT ["/home/entry_point.sh"]
