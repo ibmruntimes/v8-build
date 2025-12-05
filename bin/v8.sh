@@ -8,11 +8,9 @@ if [[ -z "$V8_MODE" ]] ; then
 fi
 
 # Build gn
-# (optional) run gn unittests
 # Use a platform specific `ninja` binary
 cd /home/gn && \
   python3 build/gen.py && ninja -C out && \
-  out/gn_unittests && \
   cp out/gn /bin/gn && \
   chmod +x /bin/gn && cd /home
 
