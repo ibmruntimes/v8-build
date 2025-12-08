@@ -19,6 +19,15 @@ MACHINE_ARCH=$(uname -m)
 
 docker pull $DOCKER_REGISTRY/rt-nodejs-v8-$MACHINE_ARCH:latest
 
-docker run -e NPROC=$NPROC -e BIN=$BIN -e V8_BRANCH=$V8_BRANCH -e V8_MODE=$V8_MODE -v $CCACHE_DIR:/root/.ccache -v /etc/rhsm:/etc/rhsm -v /etc/pki/entitlement:/etc/pki/entitlement -v /etc/pki/consumer:/etc/pki/consumer $DOCKER_REGISTRY/rt-nodejs-v8-$MACHINE_ARCH
+docker run \
+  -e NPROC=$NPROC \
+  -e BIN=$BIN \
+  -e V8_BRANCH=$V8_BRANCH \
+  -e V8_MODE=$V8_MODE \
+  -v $CCACHE_DIR:/root/.ccache \
+  -v /etc/rhsm:/etc/rhsm \
+  -v /etc/pki/entitlement:/etc/pki/entitlement \
+  -v /etc/pki/consumer:/etc/pki/consumer \
+  $DOCKER_REGISTRY/rt-nodejs-v8-$MACHINE_ARCH
 
 docker system prune -f

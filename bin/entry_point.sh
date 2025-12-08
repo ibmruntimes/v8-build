@@ -19,10 +19,10 @@ RHEL_VERSION="8.10"
 CLANG_VERSION="19.1.7"
 RUST_VERSION="1.84.1"
 
-if [[ -z "$NPROC" ]] ; then
+if [[ -z "$NPROC" ]]; then
   NPROC=$(nproc)
 fi
-if [[ -z "$BIN" ]] ; then
+if [[ -z "$BIN" ]]; then
   echo "BIN is not specified, exiting!"
   exit 1
 fi
