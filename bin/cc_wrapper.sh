@@ -25,10 +25,10 @@ extra_flags="-Wno-#warnings"
 is_third_party=false
 for arg in "$@"; do
   case "$arg" in
-    *third_party/*)
-      is_third_party=true
-      break
-      ;;
+  *third_party/*)
+    is_third_party=true
+    break
+    ;;
   esac
 done
 

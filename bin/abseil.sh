@@ -15,7 +15,7 @@
 #  limitations under the License.
 #
 
-if [[ -z "$NPROC" ]] ; then
+if [[ -z "$NPROC" ]]; then
   NPROC=$(nproc)
 fi
 
