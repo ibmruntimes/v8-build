@@ -1,20 +1,3 @@
-if [[ -z "$V8_BRANCH" ]]; then
-  echo "V8_BRANCH is not specified, exiting!"
-  exit 1
-fi
-if [[ -z "$V8_MODE" ]]; then
-  echo "V8_MODE is not specified, exiting!"
-  exit 1
-fi
-
-# Build gn
-# Use a platform specific `ninja` binary
-cd /home/gn &&
-  python3 build/gen.py && ninja -C out &&
-  cp out/gn /bin/gn &&
-  chmod +x /bin/gn && cd /home
-
-# Set path to gn depending on architecture, install any dependencies
 MACHINE_ARCH=
 if [ $(uname -m) == "s390x" ]; then
   MACHINE_ARCH="s390x"
@@ -24,11 +7,23 @@ else
   echo "We only build on s390x and ppc64le, exiting!"
   exit 1
 fi
-
+if [[ -z "$V8_BRANCH" ]]; then
+  echo "V8_BRANCH is not specified, exiting!"
+  exit 1
+fi
+if [[ -z "$V8_MODE" ]]; then
+  echo "V8_MODE is not specified, exiting!"
+  exit 1
+fi
 if [[ ! -f /home/$MACHINE_ARCH/$V8_MODE.gn ]]; then
   echo "gn args file for '$V8_MODE' mode not found, exiting!"
   exit 1
 fi
+
+# Build gn
+git clone https://gn.googlesource.com/gn
+cd gn && python3 build/gen.py && ninja -C out
+cd /home
 
 # Build and test V8
 echo "===================================="
@@ -74,8 +69,8 @@ fi
 cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh
 mkdir -p out/$MACHINE_ARCH
 cp /home/$MACHINE_ARCH/$V8_MODE.gn out/$MACHINE_ARCH/args.gn
-gn gen /home/v8/out/$MACHINE_ARCH
-ninja -C /home/v8/out/$MACHINE_ARCH -j $NPROC
+/home/gn/out/gn gen out/$MACHINE_ARCH
+ninja -C out/$MACHINE_ARCH -j $NPROC
 
 # Run the tests
 python3 tools/run-tests.py -j $NPROC --time --progress=dots --timeout=240 --no-presubmit \

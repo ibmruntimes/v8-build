@@ -15,5 +15,6 @@
 #  limitations under the License.
 #
 
-cd /home/gn && python3 build/gen.py && ninja -C out
+git clone https://gn.googlesource.com/gn
+cd gn && python3 build/gen.py && ninja -C out
 out/gn_unittests
