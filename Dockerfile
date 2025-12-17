@@ -48,9 +48,6 @@ RUN pip3 install httplib2==0.22.0 six requests filecheck
 # Clone depot_tools and add it to your path
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 
-# Clone gn
-RUN git clone https://gn.googlesource.com/gn
-
 # Set environment variables
 ENV CC=clang
 ENV CXX=clang++
