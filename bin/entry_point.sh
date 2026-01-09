@@ -42,6 +42,7 @@ rustc --version
 git clone https://github.com/ninja-build/ninja.git && cd ninja
 git checkout release && ./configure.py --bootstrap
 mv ninja /usr/bin
+cd ..
 
 # Run the final script
 bash ./$BIN.sh
