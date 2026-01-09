@@ -38,5 +38,10 @@ cargo install bindgen-cli
 clang++ --version
 rustc --version
 
+# Build Ninja
+git clone https://github.com/ninja-build/ninja.git && cd ninja
+git checkout release && ./configure.py --bootstrap
+mv ninja /usr/bin
+
 # Run the final script
 bash ./$BIN.sh

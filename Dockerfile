@@ -27,7 +27,6 @@ RUN dnf -y install \
     xz \
     git \
     python3.11 \
-    ninja-build \
     make \
     cmake \
     glib2-devel
