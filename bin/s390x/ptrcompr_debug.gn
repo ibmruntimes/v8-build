@@ -16,3 +16,4 @@ rust_sysroot_absolute = "/usr"
 rust_bindgen_root = "/root/.cargo"
 rustc_version = "1.84.1"
 clang_version = "19"
+v8_enable_maglev = false
