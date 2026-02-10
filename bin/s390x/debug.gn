@@ -12,6 +12,6 @@ symbol_level = 0
 cc_wrapper = "cc_wrapper.sh"
 disable_unknown_warning_option = true
 rust_sysroot_absolute = "/usr"
-rust_bindgen_root = "/root/.cargo"
+rust_bindgen_root = "/usr"
 rustc_version = "1.84.1"
 clang_version = "19"
