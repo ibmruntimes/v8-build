@@ -31,8 +31,7 @@ fi
 subscription-manager release --set="$RHEL_VERSION"
 
 # Install the toolchain
-dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION
-cargo install bindgen-cli
+dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION bindgen-cli
 
 # Print the compiler versions
 clang++ --version
