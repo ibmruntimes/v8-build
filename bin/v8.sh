@@ -36,6 +36,13 @@ echo "===================================="
 DEPOT_TOOLS_BOOTSTRAP_PYTHON3=0 fetch v8
 cd v8
 
+# Temporary fix for build failure
+# TODO: Remove once http://crrev.com/c/7583186 lands
+cd build
+git revert --no-commit a596289f879e33532ada836fa04679de7e2c1bd6
+git revert --no-commit 324964b3a72a44300cfdb27f838dcff99d8b12ad
+cd ..
+
 # Identify Beta and Stable branches
 git branch -at |
   /bin/grep branch-heads |
