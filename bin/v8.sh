@@ -36,13 +36,6 @@ echo "===================================="
 DEPOT_TOOLS_BOOTSTRAP_PYTHON3=0 fetch v8
 cd v8
 
-# Temporary fix for build failure
-# TODO: Remove once http://crrev.com/c/7583186 lands
-cd build
-git revert --no-commit a596289f879e33532ada836fa04679de7e2c1bd6
-git revert --no-commit 324964b3a72a44300cfdb27f838dcff99d8b12ad
-cd ..
-
 # Identify Beta and Stable branches
 git branch -at |
   /bin/grep branch-heads |
@@ -71,6 +64,15 @@ git checkout $CHECKOUT
 if [ "$CHECKOUT" != "main" ]; then
   DEPOT_TOOLS_BOOTSTRAP_PYTHON3=0 gclient sync
 fi
+
+# Remove compiler flags unsupported by current Clang version.
+# Re-evaluate this list when upgrading Clang.
+find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
+  -e '/-Wno-unsafe-buffer-usage-in-static-sized-array/d' \
+  -e '/-Wno-nontrivial-memcall/d' \
+  -e '/-Wno-uninitialized-const-pointer/d' \
+  -e '/-fno-lifetime-dse/d' \
+  -e '/-fsanitize-ignore-for-ubsan-feature=/d'
 
 # Copy args required for gn, build
 cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh
