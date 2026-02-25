@@ -9,7 +9,6 @@ v8_enable_object_print = true
 v8_enable_verify_heap = true
 is_debug = false
 cc_wrapper = "cc_wrapper.sh"
-disable_unknown_warning_option = true
 rust_sysroot_absolute = "/usr"
 rust_bindgen_root = "/usr"
 rustc_version = "1.84.1"
