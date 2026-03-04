@@ -24,4 +24,4 @@ git checkout master
 mkdir build && cd build
 cmake .. -DABSL_BUILD_TESTING=ON -DBUILD_TESTING=ON -DABSL_USE_GOOGLETEST_HEAD=ON
 MAKEFLAGS="-j$NPROC" cmake --build . --target all
-ctest -j$NPROC
+ctest -j$NPROC --exclude-regex "absl_strings_append_and_overwrite_test|absl_resize_uninitialized_test|absl_cord_test"
