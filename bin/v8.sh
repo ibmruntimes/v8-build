@@ -70,10 +70,9 @@ fi
 # Also check excluded platform specific flags under BUILD.gn.
 find build/ -name "*.gn" | xargs sed -i \
   -e '/-Wno-unsafe-buffer-usage-in-static-sized-array/d' \
-  -e '/-Wno-nontrivial-memcall/d' \
   -e '/-Wno-uninitialized-const-pointer/d' \
   -e '/-fno-lifetime-dse/d' \
-  -e '/-fsanitize-ignore-for-ubsan-feature=/d'
+  -e '/-fsanitize-ignore-for-ubsan-feature/d'
 
 # Copy args required for gn, build
 cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh

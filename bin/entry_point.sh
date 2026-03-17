@@ -16,8 +16,8 @@
 #
 
 RHEL_VERSION="8.10"
-CLANG_VERSION="19.1.7"
-RUST_VERSION="1.84.1"
+CLANG_VERSION="20.1.8"
+RUST_VERSION="1.88.0"
 
 if [[ -z "$NPROC" ]]; then
   NPROC=$(nproc)
