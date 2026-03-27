@@ -19,8 +19,7 @@
 # You can avoid using it if you disable that flag in your GN args file.
 # TODO: Re-evaluate this list when upgrading Clang.
 
-# Libc++ only supports Clang 20 and later.
-extra_flags="-Wno-#warnings"
+extra_flags=""
 
 # Check if we are building third party libs.
 is_third_party=false
