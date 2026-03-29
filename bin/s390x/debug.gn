@@ -12,5 +12,5 @@ symbol_level = 0
 cc_wrapper = "cc_wrapper.sh"
 rust_sysroot_absolute = "/usr"
 rust_bindgen_root = "/usr"
-rustc_version = "1.84.1"
-clang_version = "19"
+rustc_version = "1.88.0"
+clang_version = "20"
