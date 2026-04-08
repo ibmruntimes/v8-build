@@ -68,7 +68,7 @@ fi
 # Remove compiler flags unsupported by current Clang version.
 # TODO: Re-evaluate this list when upgrading Clang.
 # Also check excluded platform specific flags under BUILD.gn.
-find build/ -name "*.gn" | xargs sed -i \
+find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
   -e '/-Wno-unsafe-buffer-usage-in-static-sized-array/d' \
   -e '/-Wno-uninitialized-const-pointer/d' \
   -e '/-fno-lifetime-dse/d' \
