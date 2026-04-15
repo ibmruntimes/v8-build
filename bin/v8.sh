@@ -20,11 +20,6 @@ if [[ ! -f /home/$MACHINE_ARCH/$V8_MODE.gn ]]; then
   exit 1
 fi
 
-# Build gn
-git clone https://gn.googlesource.com/gn
-cd gn && python3 build/gen.py && ninja -C out
-cd /home
-
 # Build and test V8
 echo "===================================="
 echo "Architecture is:" $MACHINE_ARCH
@@ -78,7 +73,7 @@ find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
 cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh
 mkdir -p out/$MACHINE_ARCH
 cp /home/$MACHINE_ARCH/$V8_MODE.gn out/$MACHINE_ARCH/args.gn
-/home/gn/out/gn gen out/$MACHINE_ARCH
+gn gen out/$MACHINE_ARCH
 ninja -C out/$MACHINE_ARCH -j $NPROC
 
 # Run the tests

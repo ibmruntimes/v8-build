@@ -15,20 +15,24 @@
 #  limitations under the License.
 #
 
-if [[ -z "$NPROC" ]]; then
-  NPROC=$(nproc)
-fi
-if [[ -z "$BIN" ]]; then
-  echo "BIN is not specified, exiting!"
-  exit 1
-fi
+RHEL_VERSION="8.10"
+CLANG_VERSION="20.1.8"
+RUST_VERSION="1.88.0"
 
-# Install the toolchain
-bash ./install_toolchain.sh
+# Pin subscription-manager release to match container OS version
+subscription-manager release --set="$RHEL_VERSION"
 
-# Print the compiler versions
-clang++ --version
-rustc --version
+# Install the LLVM toolchain
+dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION bindgen-cli
 
-# Run the final script
-bash ./$BIN.sh
+# Build Ninja
+git clone https://github.com/ninja-build/ninja.git && cd ninja
+git checkout release && ./configure.py --bootstrap
+mv ninja /usr/bin
+cd ..
+
+# Build GN
+git clone https://gn.googlesource.com/gn && cd gn
+python3 build/gen.py && ninja -C out
+mv out/gn /usr/bin
+cd ..
