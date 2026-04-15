@@ -15,10 +15,6 @@
 #  limitations under the License.
 #
 
-RHEL_VERSION="8.10"
-CLANG_VERSION="20.1.8"
-RUST_VERSION="1.88.0"
-
 if [[ -z "$NPROC" ]]; then
   NPROC=$(nproc)
 fi
@@ -27,21 +23,12 @@ if [[ -z "$BIN" ]]; then
   exit 1
 fi
 
-# Pin subscription-manager release to match container OS version
-subscription-manager release --set="$RHEL_VERSION"
-
 # Install the toolchain
-dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION bindgen-cli
+bash ./install_toolchain.sh
 
 # Print the compiler versions
 clang++ --version
 rustc --version
-
-# Build Ninja
-git clone https://github.com/ninja-build/ninja.git && cd ninja
-git checkout release && ./configure.py --bootstrap
-mv ninja /usr/bin
-cd ..
 
 # Run the final script
 bash ./$BIN.sh
