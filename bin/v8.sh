@@ -1,4 +1,3 @@
-MACHINE_ARCH=
 if [ $(uname -m) == "s390x" ]; then
   MACHINE_ARCH="s390x"
 elif [ $(uname -m) == "ppc64le" ]; then
@@ -70,7 +69,7 @@ find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
   -e '/-fsanitize-ignore-for-ubsan-feature/d'
 
 # Copy args required for gn, build
-cp /home/cc_wrapper.sh /bin && chmod +x /bin/cc_wrapper.sh
+cp /home/cc_wrapper.sh /bin
 mkdir -p out/$MACHINE_ARCH
 cp /home/$MACHINE_ARCH/$V8_MODE.gn out/$MACHINE_ARCH/args.gn
 gn gen out/$MACHINE_ARCH
