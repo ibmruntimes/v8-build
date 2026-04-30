@@ -19,7 +19,8 @@
 # You can avoid using it if you disable that flag in your GN args file.
 # TODO: Re-evaluate this list when upgrading Clang.
 
-extra_flags=""
+# Libc++ only supports Clang 21 and later.
+extra_flags="-Wno-#warnings"
 
 # Check if we are building third party libs.
 is_third_party=false
