@@ -22,6 +22,6 @@ fi
 git clone https://github.com/google/highway.git && cd highway
 git checkout master
 mkdir build && cd build
-cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DHWY_ENABLE_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-DHWY_BROKEN_EMU128=0'
+cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DHWY_ENABLE_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-march=z14 -mzvector'
 make -j$NPROC
 make test -j$NPROC
