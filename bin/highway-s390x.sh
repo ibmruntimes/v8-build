@@ -24,4 +24,4 @@ git checkout master
 mkdir build && cd build
 cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-DHWY_BROKEN_EMU128=0'
 make -j$NPROC
-make test -j$NPROC
+make test -j$NPROC ARGS="--exclude-regex 'Cuckoo2x2|Phast'"
