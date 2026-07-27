@@ -16,8 +16,8 @@
 #
 
 RHEL_VERSION="8.10"
-CLANG_VERSION="20.1.8"
-RUST_VERSION="1.88.0"
+CLANG_VERSION="21.1.8"
+RUST_VERSION="1.92.0"
 
 # Pin subscription-manager release to match container OS version
 subscription-manager release --set="$RHEL_VERSION"

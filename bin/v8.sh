@@ -64,7 +64,6 @@ fi
 # Also check excluded platform specific flags under BUILD.gn.
 find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
   -e '/-Wno-unsafe-buffer-usage-in-static-sized-array/d' \
-  -e '/-Wno-uninitialized-const-pointer/d' \
   -e '/-Wno-unused-but-set-global/d' \
   -e '/-fno-lifetime-dse/d' \
   -e '/-fsanitize-ignore-for-ubsan-feature/d' \
