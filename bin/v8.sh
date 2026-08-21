@@ -65,6 +65,7 @@ fi
 find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
   -e '/-Wno-unsafe-buffer-usage-in-static-sized-array/d' \
   -e '/-Wno-unused-but-set-global/d' \
+  -e '/-Wno-stringop-overread' \
   -e '/-fno-lifetime-dse/d' \
   -e '/-fsanitize-ignore-for-ubsan-feature/d' \
   -e '/-fdiagnostics-show-inlining-chain/d'
