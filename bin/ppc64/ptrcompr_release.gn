@@ -12,5 +12,5 @@ v8_enable_pointer_compression = true
 cc_wrapper = "cc_wrapper.sh"
 rust_sysroot_absolute = "/usr"
 rust_bindgen_root = "/usr"
-rustc_version = "1.88.0"
-clang_version = "20"
+rustc_version = "1.92.0"
+clang_version = "21"
