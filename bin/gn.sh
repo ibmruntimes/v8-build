@@ -16,5 +16,5 @@
 #
 
 git clone https://gn.googlesource.com/gn
-cd gn && python3 build/gen.py && ninja -C out
+cd gn && python3 build/gen.py && ninja -C out gn
 out/gn_unittests
