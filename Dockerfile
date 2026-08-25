@@ -52,6 +52,7 @@ ENV CC=clang
 ENV CXX=clang++
 ENV PATH=$PATH:/home/depot_tools/
 ENV VPYTHON_BYPASS="manually managed python not supported by chrome operations"
+ENV V8_HERMETIC_PYTHON_BYPASS=1
 ENV RUSTC_BOOTSTRAP=1
 
 # Copy the bin folder
