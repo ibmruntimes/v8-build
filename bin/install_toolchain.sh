@@ -23,7 +23,7 @@ RUST_VERSION="1.92.0"
 subscription-manager release --set="$RHEL_VERSION"
 
 # Install the LLVM toolchain
-dnf -y install llvm-toolset-$CLANG_VERSION rust-toolset-$RUST_VERSION bindgen-cli
+dnf -y install llvm-toolset-$CLANG_VERSION python3.12-clang-$CLANG_VERSION rust-toolset-$RUST_VERSION bindgen-cli
 
 # Build Ninja
 git clone https://github.com/ninja-build/ninja.git && cd ninja

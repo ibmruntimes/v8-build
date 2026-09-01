@@ -70,6 +70,14 @@ find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
   -e '/-fsanitize-ignore-for-ubsan-feature/d' \
   -e '/-fdiagnostics-show-inlining-chain/d'
 
+# This workaround is needed on s390x when calling `tools/metagen/metagen.py`.
+# Without it, it will crash with a `Floating point exception`.
+mkdir -p /opt/metagen-clang
+cp -r /usr/lib/python3.12/site-packages/clang /opt/metagen-clang/
+sed -i -e 's/CFUNCTYPE(c_int, Cursor, Cursor, py_object)/CFUNCTYPE(c_longlong, Cursor, Cursor, py_object)/' \
+       -e 's/CFUNCTYPE(c_int, Cursor, py_object)/CFUNCTYPE(c_longlong, Cursor, py_object)/' \
+       /opt/metagen-clang/clang/cindex.py
+
 # Copy args required for gn, build
 cp /home/cc_wrapper.sh /bin
 mkdir -p out/$MACHINE_ARCH
