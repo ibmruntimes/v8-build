@@ -22,6 +22,6 @@ fi
 git clone https://github.com/google/highway.git && cd highway
 git checkout master
 mkdir build && cd build
-cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DHWY_ENABLE_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-march=z14 -mzvector'
+cmake .. -DHWY_WARNINGS_ARE_ERRORS:BOOL=ON -DHWY_ENABLE_CONTRIB=OFF -DHWY_ENABLE_EXAMPLES=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS='-march=z14 -mzvector'
 make -j$NPROC
-make test -j$NPROC ARGS="--exclude-regex 'Cuckoo2x2|Phast|RangeCoder'"
+make test -j$NPROC
