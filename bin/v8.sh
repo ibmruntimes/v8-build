@@ -72,6 +72,9 @@ find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
 
 # This workaround is needed on s390x when calling `tools/metagen/metagen.py`.
 # Without it, it will crash with a `Floating point exception`.
+# TODO: This is already patched on llvm main branch, remove the workaround once
+# python3.12-clang package ships the fix:
+# https://github.com/llvm/llvm-project/commit/f05ae44
 mkdir -p /opt/metagen-clang
 cp -r /usr/lib/python3.12/site-packages/clang /opt/metagen-clang/
 sed -i -e 's/CFUNCTYPE(c_int, Cursor, Cursor, py_object)/CFUNCTYPE(c_longlong, Cursor, Cursor, py_object)/' \
