@@ -16,3 +16,4 @@ rustc_version = "1.92.0"
 clang_version = "21"
 v8_metagen_libclang_so = "/usr/lib64/libclang.so.21.1.8"
 v8_metagen_libclang_bindings_dir = "/opt/metagen-clang"
+added_rust_stdlib_libs = [ "addr2line", "gimli", "miniz_oxide", "adler2" ]
