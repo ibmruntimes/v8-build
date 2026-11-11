@@ -28,6 +28,7 @@ docker run \
   -v /etc/rhsm:/etc/rhsm \
   -v /etc/pki/entitlement:/etc/pki/entitlement \
   -v /etc/pki/consumer:/etc/pki/consumer \
+  -v /etc/yum.repos.d:/etc/yum.repos.d \
   $DOCKER_REGISTRY/rt-nodejs-v8-$MACHINE_ARCH
 
 docker system prune -f
