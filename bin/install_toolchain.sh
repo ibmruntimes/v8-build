@@ -21,6 +21,8 @@ RUST_VERSION="1.92.0"
 
 # Pin subscription-manager release to match container OS version
 subscription-manager release --set="$RHEL_VERSION"
+# Enable access to full RHEL repositories
+subscription-manager config --rhsm.manage_repos=1
 
 # Install the LLVM toolchain
 dnf -y install llvm-toolset-$CLANG_VERSION python3.12-clang-$CLANG_VERSION rust-toolset-$RUST_VERSION bindgen-cli
