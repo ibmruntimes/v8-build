@@ -66,9 +66,11 @@ find build/ \( -name "*.gn" -o -name "*.gni" \) | xargs sed -i \
   -e '/-Wno-unsafe-buffer-usage-in-static-sized-array/d' \
   -e '/-Wno-unused-but-set-global/d' \
   -e '/-Wno-stringop-overread/d' \
+  -e '/-Wno-unsequenced-volatile/d' \
   -e '/-fno-lifetime-dse/d' \
   -e '/-fsanitize-ignore-for-ubsan-feature/d' \
-  -e '/-fdiagnostics-show-inlining-chain/d'
+  -e '/-fdiagnostics-show-inlining-chain/d' \
+  -e '/-fno-module-local-hints/d'
 
 # This workaround is needed on s390x when calling `tools/metagen/metagen.py`.
 # Without it, it will crash with a `Floating point exception`.
